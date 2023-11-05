@@ -83,7 +83,9 @@ elif [ "$number" = "8" ]
 then read -p "Do you want to get the average 'rating' of movies rated by users with 'age' between 20 and 29 and 'occupation' as 'programmer'?(y/n) : " ans
 case $ans in
 y)
-     cat u.user |sed 's/M/male/g;s/F/female/g;'| awk -F\|  '{print "user "$1" is "$2" years old " $3, $4 }' | head -n 10 ;;
+usr=$( cat u.user | awk -F\| '(20<=$2)&&($2<=29)&&($4=="programmer") {printf $1"|"}')
+printf "$usr\n"
+;;
 n)
 echo "okay bye..";;
 *)
